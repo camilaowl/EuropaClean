@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.androidMultiplatformLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.serialization)
 }
 
 kotlin {
@@ -46,6 +47,12 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(project(":core:designsystem"))
+            implementation(project(":core:navigation"))
+            implementation(project(":feature:schedule"))
+            implementation(project(":feature:spaces"))
+            implementation(project(":feature:settings"))
+            implementation(project(":feature:onboarding"))
+            implementation(project(":feature:auth"))
 
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.core)
@@ -58,6 +65,7 @@ kotlin {
             implementation(libs.compose.ui)
             implementation(libs.compose.components.resources)
             implementation(libs.compose.uiToolingPreview)
+            implementation(libs.compose.navigation)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
         }

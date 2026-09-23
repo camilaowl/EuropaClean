@@ -20,7 +20,9 @@ kotlin {
             jvmTarget = JvmTarget.JVM_11
         }
 
-        withHostTest {}
+        androidResources {
+            enable = true
+        }
     }
 
     sourceSets {
@@ -28,11 +30,9 @@ kotlin {
             api(libs.compose.foundation)
             api(libs.compose.runtime)
             api(libs.compose.ui)
+            api(libs.compose.components.resources)
 
             implementation(libs.compose.material3)
-        }
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
         }
     }
 }
