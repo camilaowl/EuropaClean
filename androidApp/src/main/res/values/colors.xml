@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="europa_clean_window_background">#F8F9FC</color>
+    <color name="europa_clean_primary">#3E6078</color>
+    <color name="europa_clean_secondary">#52616B</color>
+    <color name="europa_clean_tertiary">#80542F</color>
+</resources>

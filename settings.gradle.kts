@@ -28,4 +28,11 @@ dependencyResolutionManagement {
 }
 
 include(":androidApp")
+include(":core:designsystem")
 include(":shared")
+include(":feature:schedule")
+include(":feature:spaces")
+include(":feature:settings")
+include(":feature:onboarding")
+include(":feature:auth")
+include(":core:navigation")

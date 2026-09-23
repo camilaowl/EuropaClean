@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.EuropaClean" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/europa_clean_window_background</item>
+        <item name="colorPrimary">@color/europa_clean_primary</item>
+        <item name="colorSecondary">@color/europa_clean_secondary</item>
+        <item name="colorTertiary">@color/europa_clean_tertiary</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+</resources>
