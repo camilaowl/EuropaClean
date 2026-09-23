@@ -25,6 +25,7 @@ credentials = "1.7.0-alpha03"
 google-id = "1.2.1"
 firebase-bom = "34.19.0"
 google-services = "4.5.0"
+firebase-crashlytics = "3.0.8"
 navigation-compose = "2.9.2"
 
 [libraries]
@@ -67,6 +68,7 @@ androidx-credentials-play-services-auth = { module = "androidx.credentials:crede
 google-id = { module = "com.google.android.libraries.identity.googleid:googleid", version.ref = "google-id" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -77,6 +79,7 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 androidLint = { id = "com.android.lint", version.ref = "agp" }
 googleServices = { id = "com.google.gms.google-services", version.ref = "google-services"}
+firebaseCrashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics"}
 cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 koin-compiler = { id = "io.insert-koin.compiler.plugin", version.ref = "koin-plugin" }
