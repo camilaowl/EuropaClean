@@ -44,10 +44,12 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.compose.uiTooling)
+            implementation(libs.koin.android)
         }
         commonMain.dependencies {
             implementation(project(":core:designsystem"))
             implementation(project(":core:navigation"))
+            implementation(project(":core:authentication"))
             implementation(project(":feature:schedule"))
             implementation(project(":feature:spaces"))
             implementation(project(":feature:settings"))
@@ -57,6 +59,7 @@ kotlin {
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
+            implementation(libs.koin.ktor)
             implementation(libs.koin.compose.viewmodel)
 
             implementation(libs.compose.runtime)
@@ -71,6 +74,7 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+            implementation(libs.koin.test)
         }
     }
 }

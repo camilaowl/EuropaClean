@@ -59,6 +59,7 @@ kotlin {
             dependencies {
                 implementation(project(":core:navigation"))
                 implementation(project(":core:designsystem"))
+                implementation(project(":core:authentication"))
 
                 implementation(libs.kotlin.stdlib)
                 implementation(project.dependencies.platform(libs.koin.bom))
@@ -72,6 +73,8 @@ kotlin {
                 implementation(libs.compose.components.resources)
                 implementation(libs.compose.uiToolingPreview)
                 implementation(libs.compose.navigation)
+                implementation(libs.androidx.lifecycle.viewmodelCompose)
+                implementation(libs.androidx.lifecycle.runtimeCompose)
             }
         }
 
@@ -83,9 +86,8 @@ kotlin {
 
         androidMain {
             dependencies {
-                // Add Android-specific dependencies here. Note that this source set depends on
-                // commonMain by default and will correctly pull the Android artifacts of any KMP
-                // dependencies declared in commonMain.
+                implementation(libs.androidx.activity.compose)
+                implementation(libs.androidx.credentials)
             }
         }
 

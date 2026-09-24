@@ -1,6 +1,6 @@
 # Agent guidance
 
-This early-stage Kotlin Multiplatform app targets Android and iOS with Compose Multiplatform. Follow feature-first modularization, Clean Architecture principles, MVVM, and the Repository pattern. Current placeholder screens do not define the full architecture.
+This early-stage Kotlin Multiplatform app uses Compose Multiplatform, but Android is the only supported product target. Keep the iOS target buildable with minimal, non-functional stubs; do not implement iOS-specific functionality unless explicitly requested. Follow feature-first modularization, Clean Architecture principles, MVVM, and the Repository pattern. Current placeholder screens do not define the full architecture.
 
 ## Required architectural boundaries
 
@@ -16,6 +16,8 @@ This early-stage Kotlin Multiplatform app targets Android and iOS with Compose M
 ## Implementation preferences
 
 - Prefer `commonMain`; use platform-specific source sets only for genuine platform API needs. Add `data`, `domain`, or `presentation` packages only when they have work to do.
+- Authentication providers are platform-specific: Android uses Google Sign In through Credential Manager, while iOS will use Sign in with Apple when iOS development begins. Keep shared authentication UI and session boundaries provider-neutral. Do not add Google authentication stubs or configuration to iOS, and do not implement Apple authentication until explicitly requested; keep the iOS target buildable with a disabled placeholder in the meantime.
+- Keep Android Google authentication in Android source sets. Supply the current `Activity` only when launching Credential Manager UI, never retain it in an application singleton, and create request options and nonces for each authentication attempt rather than injecting them as long-lived dependencies.
 - Favor meaningful boundaries over ceremonial layers: a ViewModel may call a repository interface directly for simple CRUD or retrieval. Add remote/local data sources only when they encapsulate a real responsibility. Use internal extension functions for simple DTO mappings; use mapper classes/packages when mapping is complex or reused.
 - Keep `Content` stateless where practical, receiving immutable state and callbacks. Move UI components into the design system only when genuinely reusable across features.
 - Prefer one immutable UI state data class; use sealed state hierarchies only for mutually exclusive states. Prefer intent-named ViewModel methods such as `onLoginClick()` and `onEmailChanged(value)`. Add sealed action/event types only when complexity warrants them. Represent important ViewModel outcomes as state where practical instead of defaulting to channels, shared flows, or one-shot effect wrappers.

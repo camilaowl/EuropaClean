@@ -5,6 +5,10 @@ import com.ca.europaclean.getPlatform
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-internal actual val platformModule: Module = module {
+private val iosCorePlatformModule = module {
     single<Platform> { getPlatform() }
+}
+
+internal fun iosPlatformModule(): Module = module {
+    includes(iosCorePlatformModule)
 }

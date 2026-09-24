@@ -9,23 +9,40 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import com.ca.europaclean.core.designsystem.theme.Theme
+import kotlinx.coroutines.launch
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun SignInRoute(
     onSignIn: () -> Unit,
 ) {
+    val viewModel = koinViewModel<SignInViewModel>()
+    val scope = rememberCoroutineScope()
+
+    LaunchedEffect(Unit) {
+        scope.launch {
+            viewModel.autoSignIn()
+        }
+    }
+
     SignInScreen(
-        onSignIn = onSignIn
+        onGoogleSignInClick = {
+            scope.launch {
+                viewModel.signInWithGoogle()
+            }
+        }
     )
 }
 
 @Composable
 internal fun SignInScreen(
-    onSignIn: () -> Unit,
+    onGoogleSignInClick: () -> Unit = {}
 ) {
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -50,7 +67,7 @@ internal fun SignInScreen(
             )
 
             Button(
-                onClick = onSignIn,
+                onClick = onGoogleSignInClick,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Theme.colors.primary,
                     contentColor = Theme.colors.onPrimary,
