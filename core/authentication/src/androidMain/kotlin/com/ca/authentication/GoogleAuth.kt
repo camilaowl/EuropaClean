@@ -1,7 +1,8 @@
 package com.ca.authentication
 
+import android.app.Activity
 import android.content.ContentValues.TAG
-import android.content.Context
+import android.content.MutableContextWrapper
 import android.util.Log
 import androidx.credentials.CredentialManager
 import androidx.credentials.CustomCredential
@@ -13,29 +14,22 @@ import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
 import kotlinx.coroutines.coroutineScope
+import java.security.SecureRandom
 
-actual class GoogleAuth(
-    private val context: Any,
-    private val credentialManager: CredentialManager,
-    private val googleIdOption: GetGoogleIdOption,
-    private val googleSignInOption: GetSignInWithGoogleOption
+class GoogleAuth(
+    private val webClientId: String,
+    private val credentialManager: CredentialManager
 ) {
-    actual suspend fun googleIdToken(): GoogleAuthCredential {
-        // Implement the logic to retrieve the Google ID token on Android
-        // This is a placeholder implementation and should be replaced with actual code
-        return GoogleAuthCredential(idToken = "dummy_id_token", accessToken = "dummy_access_token")
-    }
-
-    actual suspend fun autoSignIn() {
+    suspend fun autoSignIn(activity: Activity) {
         val request: GetCredentialRequest = GetCredentialRequest.Builder()
-            .addCredentialOption(googleIdOption)
+            .addCredentialOption(googleIdOption(webClientId))
             .build()
 
         coroutineScope {
             try {
                 val result = credentialManager.getCredential(
                     request = request,
-                    context = context as Context,
+                    context = MutableContextWrapper(activity),
                 )
                 handleSignIn(result)
             } catch (e: GetCredentialException) {
@@ -44,16 +38,16 @@ actual class GoogleAuth(
         }
     }
 
-    actual suspend fun signIn() {
+    suspend fun signIn(activity: Activity) {
         val request: GetCredentialRequest = GetCredentialRequest.Builder()
-            .addCredentialOption(googleSignInOption)
+            .addCredentialOption(googleSignInOption(webClientId))
             .build()
 
         coroutineScope {
             try {
                 val result = credentialManager.getCredential(
                     request = request,
-                    context = context as Context,
+                    context = MutableContextWrapper(activity),
                 )
                 handleSignIn(result)
             } catch (e: GetCredentialException) {
@@ -62,7 +56,7 @@ actual class GoogleAuth(
         }
     }
 
-    fun handleSignIn(result: GetCredentialResponse) {
+    private fun handleSignIn(result: GetCredentialResponse) {
         when(result.credential) {
             is CustomCredential -> {
                 if (result.credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
@@ -83,5 +77,26 @@ actual class GoogleAuth(
                 Log.e(TAG, "Unexpected type of credential")
             }
         }
+    }
+
+    private fun googleSignInOption(webClientId: String): GetSignInWithGoogleOption {
+        return GetSignInWithGoogleOption.Builder(webClientId)
+            .setNonce(generateSecureRandomNonce())
+            .build()
+    }
+
+    private fun googleIdOption(webClientId: String): GetGoogleIdOption {
+        return GetGoogleIdOption.Builder()
+            .setFilterByAuthorizedAccounts(true)
+            .setServerClientId(webClientId)
+            .setAutoSelectEnabled(true)
+            .setNonce(generateSecureRandomNonce())
+            .build()
+    }
+
+    private fun generateSecureRandomNonce(byteLength: Int = 32): String {
+        val randomBytes = ByteArray(byteLength)
+        SecureRandom().nextBytes(randomBytes)
+        return android.util.Base64.encodeToString(randomBytes, android.util.Base64.NO_WRAP or android.util.Base64.URL_SAFE or android.util.Base64.NO_PADDING)
     }
 }
