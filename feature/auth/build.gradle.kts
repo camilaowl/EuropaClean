@@ -75,6 +75,7 @@ kotlin {
                 implementation(libs.compose.navigation)
                 implementation(libs.androidx.lifecycle.viewmodelCompose)
                 implementation(libs.androidx.lifecycle.runtimeCompose)
+                implementation(libs.kermit)
             }
         }
 

@@ -27,6 +27,7 @@ firebase-bom = "34.19.0"
 google-services = "4.5.0"
 firebase-crashlytics = "3.0.8"
 navigation-compose = "2.9.2"
+kermit = "2.2.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -69,6 +70,7 @@ google-id = { module = "com.google.android.libraries.identity.googleid:googleid"
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
+kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

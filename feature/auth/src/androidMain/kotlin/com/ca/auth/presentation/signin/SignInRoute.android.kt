@@ -34,13 +34,19 @@ actual fun SignInRoute(
     val coroutineScope = rememberCoroutineScope()
 
     LaunchedEffect(Unit) {
-        activity?.let { googleAuth.autoSignIn(it) }
+        activity?.let {
+            val result = googleAuth.autoSignIn(it)
+            viewModel.handleGoogleSignInResult(result)
+        }
     }
 
     SignInContent(
         onGoogleSignInClick = {
             coroutineScope.launch {
-                activity?.let { googleAuth.signIn(it) }
+                activity?.let {
+                    val result = googleAuth.signIn(it)
+                    viewModel.handleGoogleSignInResult(result)
+                }
             }
         }
     )
