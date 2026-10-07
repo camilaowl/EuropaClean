@@ -1,5 +1,6 @@
 package com.ca.europaclean.di
 
+import com.ca.network.NetworkConfig
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
@@ -14,7 +15,7 @@ fun initKoin(
         includes(config)
         modules(
             platformModule,
-            sharedModule()
+            sharedModule(),
         )
     }
 }

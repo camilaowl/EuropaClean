@@ -1,16 +1,16 @@
 package com.ca.auth.data
 
 import com.ca.auth.domain.AuthRepository
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 
-class AuthRepositoryImpl(
+internal class AuthRepositoryImpl(
     private val authClient: AuthClient,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : AuthRepository {
 
     override suspend fun isUserLoggedIn(): Boolean {
         return false
+    }
+
+    override suspend fun loginWithGoogle(idToken: String): Boolean {
+        return authClient.loginWithGoogle(idToken).status.value in 200..299
     }
 }

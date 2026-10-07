@@ -60,6 +60,7 @@ kotlin {
                 implementation(project(":core:navigation"))
                 implementation(project(":core:designsystem"))
                 implementation(project(":core:authentication"))
+                implementation(project(":core:network"))
 
                 implementation(libs.kotlin.stdlib)
                 implementation(project.dependencies.platform(libs.koin.bom))

@@ -29,6 +29,7 @@ dependencyResolutionManagement {
 
 include(":androidApp")
 include(":core:designsystem")
+include(":core:network")
 include(":shared")
 include(":feature:schedule")
 include(":feature:spaces")

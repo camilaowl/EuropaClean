@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -40,7 +41,14 @@ actual fun SignInRoute(
         }
     }
 
+    LaunchedEffect(uiState.isSignedIn) {
+        if (uiState.isSignedIn) {
+            onSignIn()
+        }
+    }
+
     SignInContent(
+        uiState = uiState,
         onGoogleSignInClick = {
             coroutineScope.launch {
                 activity?.let {
@@ -54,6 +62,7 @@ actual fun SignInRoute(
 
 @Composable
 internal fun SignInContent(
+    uiState: SignInUiState,
     onGoogleSignInClick: () -> Unit,
 ) {
     Surface(
@@ -80,12 +89,26 @@ internal fun SignInContent(
 
             Button(
                 onClick = onGoogleSignInClick,
+                enabled = !uiState.isLoading,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Theme.colors.primary,
                     contentColor = Theme.colors.onPrimary,
                 ),
             ) {
                 Text(text = "Continue with Google")
+            }
+
+            if (uiState.isLoading) {
+                CircularProgressIndicator()
+            }
+
+            uiState.statusMessage?.let { message ->
+                Text(
+                    text = message,
+                    color = Theme.colors.onBackground,
+                    style = Theme.typography.bodyMedium,
+                    textAlign = TextAlign.Center,
+                )
             }
         }
     }
