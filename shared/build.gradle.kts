@@ -51,6 +51,7 @@ kotlin {
             implementation(project(":core:designsystem"))
             implementation(project(":core:navigation"))
             implementation(project(":core:authentication"))
+            implementation(project(":core:datastore"))
             implementation(project(":core:network"))
             implementation(project(":feature:schedule"))
             implementation(project(":feature:spaces"))
