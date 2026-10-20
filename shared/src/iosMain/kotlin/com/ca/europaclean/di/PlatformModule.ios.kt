@@ -1,5 +1,6 @@
 package com.ca.europaclean.di
 
+import com.ca.authentication.di.iosTokenStorageModule
 import com.ca.europaclean.Platform
 import com.ca.europaclean.getPlatform
 import com.ca.network.NetworkConfig
@@ -12,5 +13,8 @@ private val iosCorePlatformModule = module {
 }
 
 internal fun iosPlatformModule(): Module = module {
-    includes(iosCorePlatformModule)
+    includes(
+        iosCorePlatformModule,
+        iosTokenStorageModule(),
+    )
 }

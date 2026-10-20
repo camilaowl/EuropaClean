@@ -1,6 +1,7 @@
 package com.ca.europaclean.di
 
 import com.ca.authentication.di.googleAuthModule
+import com.ca.authentication.di.androidTokenStorageModule
 import com.ca.europaclean.Platform
 import com.ca.europaclean.getPlatform
 import com.ca.network.NetworkConfig
@@ -17,6 +18,7 @@ private val androidCorePlatformModule = module {
 fun androidPlatformModule(googleWebClientId: String): Module = module {
     includes(
         androidCorePlatformModule,
+        androidTokenStorageModule(),
         googleAuthModule(googleWebClientId),
     )
 }

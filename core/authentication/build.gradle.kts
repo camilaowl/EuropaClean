@@ -74,6 +74,9 @@ kotlin {
 
         androidMain {
             dependencies {
+                implementation(libs.datastore.core)
+                implementation(libs.datastore.preferences.core)
+                implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.androidx.credentials)
                 implementation(libs.androidx.credentials.play.services.auth)
                 implementation(libs.google.id)
