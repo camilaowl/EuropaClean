@@ -43,7 +43,7 @@ actual class SignInViewModel actual constructor(
                             message = { "Sign-in request failed" },
                         )
                         _uiState.value = SignInUiState(
-                            statusMessage = "Unable to connect. Please try again.",
+                            statusMessage = "Unable to sign in. Please try again.",
                         )
                     }
                 }
