@@ -4,6 +4,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.ca.auth.navigation.AuthNavGraph
@@ -19,14 +23,14 @@ fun App() {
 
     val viewModel = koinViewModel<MainViewModel>()
 
-    var startDestination: TopLevelDestination = MainGraph.Schedule
+    var startDestination by remember { mutableStateOf<TopLevelDestination?>(null) }
 
     LaunchedEffect(Unit) {
         val isLoggedIn = viewModel.isUserLoggedIn()
         startDestination = if (isLoggedIn) {
             MainGraph.Schedule
         } else {
-            AuthNavGraph.SignIn
+            AuthNavGraph
         }
     }
 
@@ -36,9 +40,9 @@ fun App() {
             color = Theme.colors.background,
             contentColor = Theme.colors.onBackground,
         ) {
-            AppNavHost(
-                startDestination = startDestination
-            )
+            startDestination?.let { destination ->
+                AppNavHost(startDestination = destination)
+            }
         }
     }
 }

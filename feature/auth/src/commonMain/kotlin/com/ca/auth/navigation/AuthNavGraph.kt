@@ -9,15 +9,15 @@ import com.ca.navigation.TopLevelDestination
 import kotlinx.serialization.Serializable
 
 @Serializable
-sealed class AuthNavGraph : TopLevelDestination {
+data object AuthNavGraph : TopLevelDestination {
     @Serializable
-    data object SignIn : AuthNavGraph()
+    data object SignIn
 
     @Serializable
-    data object SignUp : AuthNavGraph()
+    data object SignUp
 
     @Serializable
-    data object ForgotPassword : AuthNavGraph()
+    data object ForgotPassword
 }
 
 fun NavGraphBuilder.authNavGraph(
