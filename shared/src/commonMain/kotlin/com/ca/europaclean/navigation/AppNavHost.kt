@@ -14,12 +14,12 @@ import com.ca.navigation.TopLevelDestination
 @Composable
 internal fun AppNavHost(
     modifier: Modifier = Modifier,
-    startGraph: TopLevelDestination = AuthNavGraph,
+    startDestination: TopLevelDestination,
     navController: NavHostController = rememberNavController(),
 ) {
     NavHost(
         navController = navController,
-        startDestination = startGraph,
+        startDestination = startDestination,
         modifier = modifier,
     ) {
         authNavGraph(

@@ -15,52 +15,6 @@ import androidx.compose.ui.text.style.TextAlign
 import com.ca.europaclean.core.designsystem.theme.Theme
 
 @Composable
-fun SignInRoute(
+expect fun SignInRoute(
     onSignIn: () -> Unit,
-) {
-    SignInScreen(
-        onSignIn = onSignIn
-    )
-}
-
-@Composable
-internal fun SignInScreen(
-    onSignIn: () -> Unit,
-) {
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = Theme.colors.background,
-        contentColor = Theme.colors.onBackground,
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(Theme.spacing.large),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(
-                space = Theme.spacing.medium,
-                alignment = Alignment.CenterVertically,
-            ),
-        ) {
-            Text(
-                text = "Sign In",
-                color = Theme.colors.onBackground,
-                style = Theme.typography.headlineMedium,
-                textAlign = TextAlign.Center,
-            )
-
-            Button(
-                onClick = onSignIn,
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Theme.colors.primary,
-                    contentColor = Theme.colors.onPrimary,
-                ),
-            ) {
-                Text(
-                    text = "Sign In",
-                    style = Theme.typography.labelLarge,
-                )
-            }
-        }
-    }
-}
+)
